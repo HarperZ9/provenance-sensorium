@@ -1,0 +1,26 @@
+from pathlib import Path
+
+from warden_sensorium.cli import main
+
+
+def test_scan_clean_fixture_returns_zero() -> None:
+    assert main(["scan", "fixtures/sample_project"]) == 0
+
+
+def test_scan_blocks_secret_file(tmp_path: Path) -> None:
+    sample = tmp_path / "README.md"
+    sample.write_text("api_key = sk-abcdefghijklmnopqrstuvwxyz\n", encoding="utf-8")
+    assert main(["scan", str(tmp_path)]) == 1
+
+
+def test_receipt_and_explain_commands(tmp_path: Path) -> None:
+    output = tmp_path / "receipt.json"
+    assert main(["receipt", "fixtures/sample_project", "--output", str(output)]) == 0
+    assert output.exists()
+    assert main(["explain", str(output)]) == 0
+
+
+def test_init_fixture_creates_sample(tmp_path: Path) -> None:
+    target = tmp_path / "demo"
+    assert main(["init-fixture", str(target)]) == 0
+    assert (target / "README.md").exists()
