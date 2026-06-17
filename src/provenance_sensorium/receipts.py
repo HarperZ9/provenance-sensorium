@@ -27,7 +27,7 @@ def receipt_from_json(text: str) -> Receipt:
 
 def explain_receipt(receipt: Receipt) -> str:
     lines = [
-        "# WARDEN Sensorium Receipt",
+        "# Provenance Sensorium Receipt",
         "",
         f"Root: `{receipt.root}`",
         f"Observations: {len(receipt.observations)}",

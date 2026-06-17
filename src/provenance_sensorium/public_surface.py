@@ -69,7 +69,7 @@ def check_public_surface(root: Path) -> list[PublicSurfaceFinding]:
             continue
         if rel.parts and rel.parts[0] == "tests":
             continue
-        if rel.as_posix() in {"src/warden_sensorium/public_surface.py", "src/warden_sensorium/sensors.py"}:
+        if rel.as_posix() in {"src/provenance_sensorium/public_surface.py", "src/provenance_sensorium/sensors.py"}:
             continue
         if path.suffix.lower() not in TEXT_SUFFIXES:
             continue

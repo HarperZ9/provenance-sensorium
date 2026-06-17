@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from warden_sensorium.cli import main
+from provenance_sensorium.cli import main
 
 
 def test_scan_clean_fixture_returns_zero() -> None:

@@ -1,5 +1,5 @@
-from warden_sensorium.layers import BoundaryGuard, ClaimGuard, DefaultExceptionStack, HumanGate, SecretGuard
-from warden_sensorium.models import Observation, Provenance, Status
+from provenance_sensorium.layers import BoundaryGuard, ClaimGuard, DefaultExceptionStack, HumanGate, SecretGuard
+from provenance_sensorium.models import Observation, Provenance, Status
 
 
 def obs(sensor: str, subject: str, summary: str, data: dict[str, str] | None = None) -> Observation:

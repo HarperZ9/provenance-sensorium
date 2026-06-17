@@ -15,4 +15,4 @@ jobs:
       - run: python -m pip install -e .
       - run: python -m pytest
       - run: python scripts/check_public_surface.py
-      - run: python -m warden_sensorium scan fixtures/sample_project
+      - run: python -m provenance_sensorium scan fixtures/sample_project
