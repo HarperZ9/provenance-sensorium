@@ -43,6 +43,20 @@ def test_human_gate_marks_attestation_as_needs_human() -> None:
     assert decisions[0].status is Status.NEEDS_HUMAN
 
 
+def test_human_gate_catches_word_final_signed() -> None:
+    # Regression: a word-final "signed" was missed by the old "signed " literal.
+    observation = obs("claim", "README.md", "Claim", {"claim": "the document must be signed"})
+    decisions = HumanGate().evaluate([observation])
+    assert decisions[0].status is Status.NEEDS_HUMAN
+
+
+def test_human_gate_ignores_design_word() -> None:
+    # Regression: "design" must not trip the gate ("sign" inside "design").
+    observation = obs("claim", "README.md", "Claim", {"claim": "a clean design with good defaults"})
+    decisions = HumanGate().evaluate([observation])
+    assert decisions == []
+
+
 def test_default_stack_runs_multiple_layers() -> None:
     observation = obs("claim", ".env", "Claim", {"claim": "authorization is approved"})
     statuses = [decision.status for decision in DefaultExceptionStack().evaluate([observation])]
