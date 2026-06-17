@@ -11,9 +11,10 @@ def test_status_values_are_stable() -> None:
     ]
 
 
-def test_provenance_digest_text_is_stable() -> None:
+def test_provenance_digest_text_is_full_width_sha256() -> None:
     digest = Provenance.digest_text("abc")
-    assert digest == "sha256:ba7816bf8f01cfea414140de5dae2223"
+    assert digest == "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    assert len(digest) == len("sha256:") + 64  # full SHA-256, not truncated
 
 
 def test_receipt_serializes_observations_and_decisions() -> None:

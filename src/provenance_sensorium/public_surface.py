@@ -1,19 +1,15 @@
 from __future__ import annotations
 
+import fnmatch
 from dataclasses import dataclass
 from pathlib import Path
-import fnmatch
-import re
+
+from .secret_patterns import first_secret_or_pii_match
 
 
 SKIP_DIRS = {".git", "__pycache__", ".pytest_cache", ".ruff_cache", "dist", "build", "*.egg-info"}
 TEXT_SUFFIXES = {".md", ".txt", ".toml", ".yaml", ".yml", ".json", ".py"}
 FORBIDDEN_PATHS = [".env", "warden-ops", "private-corpus", "client-data", "customer-data", "signed-corpus"]
-SECRET_TEXT = [
-    re.compile(r"(?i)\b(api[_-]?key|password|bearer)\b\s*[:=]\s*\S+"),
-    re.compile(r"sk-[A-Za-z0-9_-]{20,}"),
-    re.compile(r"\b\d{3}[-.) ]?\d{3}[- ]?\d{4}\b"),
-]
 
 
 @dataclass(frozen=True)
@@ -48,6 +44,8 @@ def iter_public_files(root: Path) -> list[Path]:
     patterns = gitignore_patterns(root)
     files: list[Path] = []
     for path in sorted(root.rglob("*")):
+        if path.is_symlink():
+            continue  # never follow symlinks out of the tree
         rel_parts = path.relative_to(root).parts
         if any(part in SKIP_DIRS or part.endswith(".egg-info") for part in rel_parts):
             continue
@@ -69,16 +67,14 @@ def check_public_surface(root: Path) -> list[PublicSurfaceFinding]:
             continue
         if rel.parts and rel.parts[0] == "tests":
             continue
-        if rel.as_posix() in {"src/provenance_sensorium/public_surface.py", "src/provenance_sensorium/sensors.py"}:
-            continue
         if path.suffix.lower() not in TEXT_SUFFIXES:
             continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for pattern in SECRET_TEXT:
-            if pattern.search(text):
-                findings.append(PublicSurfaceFinding(rel, "secret-shape", "secret or private-contact shaped text"))
-                break
+        if first_secret_or_pii_match(text) is not None:
+            findings.append(
+                PublicSurfaceFinding(rel, "secret-shape", "secret or private-contact shaped text")
+            )
     return findings

@@ -26,3 +26,10 @@ def test_public_surface_rejects_secret_shape(tmp_path: Path) -> None:
     (tmp_path / "README.md").write_text("api_key = sk-abcdefghijklmnopqrstuvwxyz\n", encoding="utf-8")
     findings = check_public_surface(tmp_path)
     assert any(finding.code == "secret-shape" for finding in findings)
+
+
+def test_public_surface_rejects_github_token(tmp_path: Path) -> None:
+    # New canonical pattern coverage (shared with the file sensor).
+    (tmp_path / "README.md").write_text("token: ghp_" + "a" * 36 + "\n", encoding="utf-8")
+    findings = check_public_surface(tmp_path)
+    assert any(finding.code == "secret-shape" for finding in findings)
