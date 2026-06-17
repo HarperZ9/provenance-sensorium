@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from .models import Decision, Observation, Provenance, Status
 
 
@@ -11,7 +13,17 @@ PRIVATE_PATH_FRAGMENTS = [
     "customer-data",
     "signed-corpus",
 ]
-HUMAN_GATE_TERMS = ["authorship", "authorization", "attestation", "sign ", "signed "]
+# Word-boundary patterns (text is lowercased before matching). This catches
+# word-final and inflected forms ("signed", "signature", "signing") that a
+# trailing-space substring missed, while NOT firing on "design" (no boundary
+# before "sign").
+_HUMAN_GATE_PATTERNS = [
+    re.compile(r"\bauthorship\b"),
+    re.compile(r"\bauthorization\b"),
+    re.compile(r"\battestation\b"),
+    re.compile(r"\bcountersign(?:ed|ing|ature)?\b"),
+    re.compile(r"\bsign(?:ed|ing|ature|atory)?\b"),
+]
 
 
 class SecretGuard:
@@ -85,7 +97,7 @@ class HumanGate:
         decisions: list[Decision] = []
         for observation in observations:
             text = (observation.summary + " " + str(observation.data)).lower()
-            if any(term in text for term in HUMAN_GATE_TERMS):
+            if any(pattern.search(text) for pattern in _HUMAN_GATE_PATTERNS):
                 decisions.append(
                     Decision(
                         layer=self.name,
