@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from warden_sensorium.models import Status
-from warden_sensorium.sensors import ClaimSensor, FileSensor, GitSensor, SecretShapeSensor
+from provenance_sensorium.models import Status
+from provenance_sensorium.sensors import ClaimSensor, FileSensor, GitSensor, SecretShapeSensor
 
 
 def test_file_sensor_hashes_file(tmp_path: Path) -> None:

@@ -1,4 +1,4 @@
-from warden_sensorium.models import Decision, Observation, Provenance, Receipt, Status
+from provenance_sensorium.models import Decision, Observation, Provenance, Receipt, Status
 
 
 def test_status_values_are_stable() -> None:

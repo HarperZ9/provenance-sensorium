@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from warden_sensorium.public_surface import check_public_surface
+from provenance_sensorium.public_surface import check_public_surface
 
 
 def test_current_repo_public_surface_passes() -> None:

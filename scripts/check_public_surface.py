@@ -5,7 +5,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from warden_sensorium.public_surface import check_public_surface  # noqa: E402
+from provenance_sensorium.public_surface import check_public_surface  # noqa: E402
 
 
 def main() -> int:

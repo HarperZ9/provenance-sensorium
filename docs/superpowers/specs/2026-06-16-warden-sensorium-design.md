@@ -1,28 +1,26 @@
-# WARDEN Sensorium Design
+# Provenance Sensorium Design
 
 ## Purpose
 
-WARDEN Sensorium is a public-safe live-state awareness and provenance framework
+Provenance Sensorium is a public-safe live-state awareness and provenance framework
 for AI-assisted research and security work. It turns local observations into
 structured evidence, evaluates them through explicit exception layers, and
 preserves a chain of provenance that a human can inspect before any claim,
 handoff, publication, or attestation.
 
-The product is derived from the WARDEN/AGENTS/protected-research spine, but it is
-not a publication of the private core. It models the useful architecture:
-sensor organs, exception membranes, evidence receipts, and human gates.
+It models a small, useful architecture: sensor organs, exception layers, evidence
+receipts, and human gates.
 
-## Source Concepts
+## Design Principles
 
-- Protected research thesis: the recurring structure is the ownerless seam:
-  "the exception is the sensor is the membrane."
-- Straight-line layer: seams are witnesses, not foundations. The product should
-  collect bounded evidence without laundering a private or human-only premise.
-- Human-gate runbook: AI can prepare substrate and provenance, but ownership,
-  authorship, and attestation stay human.
-- WARDEN/AGENTS inventory: existing private pieces include release gates,
-  provenance, evidence, records, response registries, probe engines, and safe IO
-  controls. Sensorium extracts the public pattern, not private data.
+- Awareness is not authority. Sensors collect bounded evidence; they do not
+  decide pass or fail and they do not assume ownership of a claim.
+- Layers classify, they do not mutate. Each exception layer reads observations
+  and emits decisions without changing the underlying readings.
+- Provenance is preserved. Every observation carries its source, command,
+  digest, timestamp, and confidence so a human can audit the chain.
+- Human gates stay human. AI can prepare substrate and provenance, but
+  ownership, authorship, and attestation remain explicit human acts.
 
 ## Product Shape
 
@@ -74,8 +72,8 @@ for v0.1.0.
 
 The repository must not contain:
 
-- `warden-ops` source, runbooks, access material, diagnostics, or recovery
-  tooling.
+- Private operational source, runbooks, access material, diagnostics, or
+  recovery tooling.
 - Private research corpus beyond short design summaries.
 - Client names, customer data, signed documents, credentials, tokens, `.env`
   values, or live target details.
@@ -88,7 +86,7 @@ The repository may contain:
 - Synthetic fixtures.
 - Defensive release and claim gates.
 - Provenance schemas.
-- Documentation explaining the membrane/human-gate model in engineering terms.
+- Documentation explaining the exception-layer/human-gate model in engineering terms.
 
 ## Architecture
 
@@ -133,9 +131,9 @@ Required tests:
 
 - `python -m pytest` passes.
 - `python scripts/check_public_surface.py` passes.
-- `python -m warden_sensorium scan fixtures/sample_project` passes.
+- `python -m provenance_sensorium scan fixtures/sample_project` passes.
 - Git status is clean except ignored local cache/runtime files.
 - GitHub repository is public.
 - GitHub release `v0.1.0` exists and points at `main`.
-- Portfolio site links to WARDEN Sensorium as a large public product under
-  WARDEN / AI safety / live-state awareness.
+- Portfolio site links to Provenance Sensorium as a large public product under
+  AI safety / live-state awareness.

@@ -17,7 +17,7 @@ Claim: [evidence:receipt] Sensorium can produce a local provenance receipt.
 FIXTURE_EVIDENCE = """# Evidence
 
 - tests: `python -m pytest`
-- receipt: `python -m warden_sensorium receipt fixtures/sample_project --output receipt.json`
+- receipt: `python -m provenance_sensorium receipt fixtures/sample_project --output receipt.json`
 """
 
 
@@ -52,7 +52,7 @@ def cmd_init_fixture(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="WARDEN Sensorium local awareness and provenance CLI.")
+    parser = argparse.ArgumentParser(description="Provenance Sensorium local awareness and provenance CLI.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     scan = subparsers.add_parser("scan", help="scan a local path")

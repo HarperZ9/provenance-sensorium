@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "warden-sensorium"
+name = "provenance-sensorium"
 version = "0.1.0"
 description = "Live-state awareness and provenance framework for AI-assisted research and security work."
 readme = "README.md"
@@ -19,7 +19,7 @@ classifiers = [
 ]
 
 [project.scripts]
-sensorium = "warden_sensorium.cli:main"
+sensorium = "provenance_sensorium.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
