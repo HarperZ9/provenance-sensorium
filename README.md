@@ -3,7 +3,7 @@
 > Turn files, git state, and Markdown claims into hash-stamped provenance receipts; flag secrets and unevidenced claims before publishing.
 
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
+![python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![version](https://img.shields.io/badge/version-0.1.0-informational.svg)
 [![CI](https://github.com/HarperZ9/provenance-sensorium/actions/workflows/tests.yml/badge.svg)](https://github.com/HarperZ9/provenance-sensorium/actions/workflows/tests.yml)
 ![deps: none](https://img.shields.io/badge/deps-none-success.svg)
@@ -49,6 +49,12 @@ python -m provenance_sensorium explain receipt.json
 - `sensorium init-fixture PATH`
 
 All commands are local-only in v0.1.0.
+
+## Usage
+
+See [USAGE.md](USAGE.md) for installation, the full command reference, worked
+examples with expected output, and the public Python library surface. A
+best-effort end-to-end script lives in [`examples/demo.py`](examples/demo.py).
 
 ## Public Boundary
 
