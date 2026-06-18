@@ -1,6 +1,13 @@
 # Provenance Sensorium
 
-Live-state awareness and provenance for AI-assisted research and security work.
+> Turn files, git state, and Markdown claims into hash-stamped provenance receipts; flag secrets and unevidenced claims before publishing.
+
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
+![version](https://img.shields.io/badge/version-0.1.0-informational.svg)
+[![CI](https://github.com/HarperZ9/provenance-sensorium/actions/workflows/tests.yml/badge.svg)](https://github.com/HarperZ9/provenance-sensorium/actions/workflows/tests.yml)
+![deps: none](https://img.shields.io/badge/deps-none-success.svg)
+[![part of: AI-accountability toolkit](https://img.shields.io/badge/part_of-AI--accountability_toolkit-7a5cff.svg)](https://harperz9.github.io)
 
 Provenance Sensorium turns local project state into structured observations, passes
 those observations through explicit exception layers, and emits receipts that a
@@ -54,3 +61,8 @@ synthetic fixtures and public-safe abstractions.
 v0.1.0 is a product seed: library, CLI, receipts, fixtures, tests, and release
 gates. The product direction is live-state awareness for accountable AI research
 workflows.
+
+---
+**Zain Dana Harper** — small tools with explicit edges.
+[Portfolio](https://harperz9.github.io) · [HarperZ9](https://github.com/HarperZ9)
+<sub>Built with Claude Code; reviewed, tested, and owned by me.</sub>
