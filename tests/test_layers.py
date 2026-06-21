@@ -1,8 +1,19 @@
-from provenance_sensorium.layers import BoundaryGuard, ClaimGuard, DefaultExceptionStack, HumanGate, SecretGuard
+from provenance_sensorium.layers import (
+    BoundaryGuard,
+    ClaimGuard,
+    DefaultExceptionStack,
+    HumanGate,
+    SecretGuard,
+)
 from provenance_sensorium.models import Observation, Provenance, Status
 
 
-def obs(sensor: str, subject: str, summary: str, data: dict[str, str] | None = None) -> Observation:
+def obs(
+    sensor: str,
+    subject: str,
+    summary: str,
+    data: dict[str, str] | None = None,
+) -> Observation:
     return Observation(
         sensor=sensor,
         subject=subject,
@@ -26,7 +37,12 @@ def test_boundary_guard_blocks_private_paths() -> None:
 
 
 def test_claim_guard_warns_without_evidence_marker() -> None:
-    observation = obs("claim", "README.md", "Claim: system is verified", {"claim": "system is verified"})
+    observation = obs(
+        "claim",
+        "README.md",
+        "Claim: system is verified",
+        {"claim": "system is verified"},
+    )
     decisions = ClaimGuard().evaluate([observation])
     assert decisions[0].status is Status.WARN
 
@@ -38,9 +54,21 @@ def test_claim_guard_passes_evidence_marked_claim() -> None:
 
 
 def test_human_gate_marks_attestation_as_needs_human() -> None:
-    observation = obs("claim", "README.md", "Claim", {"claim": "AI can sign authorship attestation"})
+    observation = obs(
+        "claim",
+        "README.md",
+        "Claim",
+        {"claim": "AI can sign authorship attestation"},
+    )
     decisions = HumanGate().evaluate([observation])
     assert decisions[0].status is Status.NEEDS_HUMAN
+    assert decisions[0].human_gap == {
+        "requires_human_act": True,
+        "act_kind": "authorship_attestation",
+        "evidence_label": "claim:README.md",
+        "evidence_digest": observation.provenance.digest.removeprefix("sha256:"),
+        "operator_attested": False,
+    }
 
 
 def test_human_gate_catches_word_final_signed() -> None:

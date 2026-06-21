@@ -33,9 +33,21 @@ def test_receipt_serializes_observations_and_decisions() -> None:
         subject="fixture.txt",
         reason="evidence marker present",
         provenance=provenance,
+        human_gap={
+            "requires_human_act": True,
+            "act_kind": "authorship_attestation",
+            "evidence_label": "file:fixture.txt",
+            "evidence_digest": "a" * 64,
+            "operator_attested": False,
+        },
     )
     receipt = Receipt(root="fixture", observations=[observation], decisions=[decision])
     rendered = receipt.to_dict()
+    loaded = Receipt.from_dict(rendered)
+
     assert rendered["root"] == "fixture"
     assert rendered["observations"][0]["data"]["bytes"] == 5
     assert rendered["decisions"][0]["status"] == "pass"
+    assert rendered["decisions"][0]["human_gap"]["operator_attested"] is False
+    assert loaded.decisions[0].human_gap is not None
+    assert loaded.decisions[0].human_gap["act_kind"] == "authorship_attestation"
