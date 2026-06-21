@@ -140,13 +140,19 @@ Build and inspect a receipt directly from Python:
 
 ```python
 from pathlib import Path
-from provenance_sensorium import build_receipt, explain_receipt, receipt_to_json
+from provenance_sensorium import (
+    build_receipt,
+    explain_receipt,
+    human_gap_requests,
+    receipt_to_json,
+)
 
 receipt = build_receipt(Path("fixtures/sample_project"))
 
 print(len(receipt.observations))          # -> 6
 print(len(receipt.decisions))             # -> 2
 print(receipt.decisions[0].status.value)  # -> "pass"
+print(human_gap_requests(receipt))        # -> []
 
 # Markdown explanation (same text the CLI prints):
 print(explain_receipt(receipt))
@@ -160,7 +166,8 @@ The public library surface is exported from the package root:
 ```python
 from provenance_sensorium import (
     Decision, Observation, Provenance, Receipt, Status,
-    build_receipt, explain_receipt, receipt_from_json, receipt_to_json,
+    build_receipt, explain_receipt, human_gap_requests,
+    receipt_from_json, receipt_to_json,
 )
 ```
 
@@ -175,3 +182,9 @@ Every receipt ends with a human-gate note. The tool prepares evidence; it does
 not, and cannot, sign the human act of authorship, authorization, or
 attestation for you. Treat `needs-human` decisions as work that requires a
 person to own.
+
+When the `human-gate` layer emits a `needs-human` decision, that decision also
+includes a `human_gap` payload compatible with proof-surface gate requests.
+`human_gap_requests(receipt)` returns those payloads for downstream tools; each
+payload keeps `operator_attested` false until a real operator completes the
+human act outside the model/tool boundary.

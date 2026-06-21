@@ -26,6 +26,8 @@ Sensorium separates four things:
 - **Exception layers** classify what the sensors found.
 - **Provenance receipts** preserve source, digest, timestamp, and confidence.
 - **Human gates** mark claims that require human ownership.
+- **Human-gap payloads** let proof-surface consume those gates without treating
+  sensor output as human attestation.
 
 The result is a small framework for safer research workflows: the system can
 prepare evidence, but it cannot truthfully sign the human part for you.

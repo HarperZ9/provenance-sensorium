@@ -105,15 +105,19 @@ class Decision:
     subject: str
     reason: str
     provenance: Provenance
+    human_gap: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        data: dict[str, Any] = {
             "layer": self.layer,
             "status": self.status.value,
             "subject": self.subject,
             "reason": self.reason,
             "provenance": self.provenance.to_dict(),
         }
+        if self.human_gap is not None:
+            data["human_gap"] = self.human_gap
+        return data
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Decision":
@@ -123,6 +127,7 @@ class Decision:
             subject=str(data["subject"]),
             reason=str(data["reason"]),
             provenance=Provenance.from_dict(data["provenance"]),
+            human_gap=data.get("human_gap"),
         )
 
 

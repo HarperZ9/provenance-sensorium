@@ -26,6 +26,32 @@ _HUMAN_GATE_PATTERNS = [
 ]
 
 
+def _act_kind(text: str) -> str:
+    if "authorship" in text:
+        return "authorship_attestation"
+    if "authorization" in text:
+        return "authorization_attestation"
+    if "attestation" in text:
+        return "attestation"
+    return "signature_attestation"
+
+
+def _digest_hex(provenance: Provenance) -> str:
+    if provenance.digest.startswith("sha256:"):
+        return provenance.digest.removeprefix("sha256:")
+    return provenance.digest
+
+
+def _human_gap_payload(observation: Observation, text: str) -> dict[str, object]:
+    return {
+        "requires_human_act": True,
+        "act_kind": _act_kind(text),
+        "evidence_label": f"{observation.sensor}:{observation.subject}",
+        "evidence_digest": _digest_hex(observation.provenance),
+        "operator_attested": False,
+    }
+
+
 class SecretGuard:
     name = "secret-guard"
 
@@ -105,6 +131,7 @@ class HumanGate:
                         subject=observation.subject,
                         reason="authorship, authorization, or attestation requires a human gate",
                         provenance=observation.provenance,
+                        human_gap=_human_gap_payload(observation, text),
                     )
                 )
         return decisions

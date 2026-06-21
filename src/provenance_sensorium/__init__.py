@@ -1,5 +1,11 @@
 from .models import Decision, Observation, Provenance, Receipt, Status
-from .receipts import build_receipt, explain_receipt, receipt_from_json, receipt_to_json
+from .receipts import (
+    build_receipt,
+    explain_receipt,
+    human_gap_requests,
+    receipt_from_json,
+    receipt_to_json,
+)
 
 __all__ = [
     "Decision",
@@ -9,6 +15,7 @@ __all__ = [
     "Status",
     "build_receipt",
     "explain_receipt",
+    "human_gap_requests",
     "receipt_from_json",
     "receipt_to_json",
 ]
