@@ -1,5 +1,41 @@
 # Provenance Sensorium
 
+![Provenance Sensorium hero](docs/brand/provenance-sensorium-hero.png)
+
+> Turn local files, git state, and Markdown claims into inspectable receipts.
+
+Provenance Sensorium reads bounded local project state and emits receipts with
+digests, timestamps, confidence notes, and human-review gaps. It is designed for
+research and release workflows where an agent should prepare evidence without
+pretending to own the final claim.
+
+## Why it matters
+
+Agents need live-state awareness, but awareness is not proof. This tool gives a
+repo local sensors that can identify useful evidence, flag secrets, and mark
+claims that need human ownership.
+
+## Try it
+
+```powershell
+python -m pip install -e .
+python -m provenance_sensorium scan fixtures/sample_project
+python -m provenance_sensorium receipt fixtures/sample_project --output receipt.json
+```
+
+## What to test first
+
+- Scan `fixtures/sample_project`.
+- Generate and explain a receipt.
+- Run `python scripts/check_public_surface.py` and `python -m pytest`.
+
+## Current status
+
+Product seed with a Python library, CLI, synthetic fixtures, tests, and release
+gates. All commands are local-only in v0.1.0.
+
+## Existing technical notes
+
 > Turn files, git state, and Markdown claims into hash-stamped provenance receipts; flag secrets and unevidenced claims before publishing.
 
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
