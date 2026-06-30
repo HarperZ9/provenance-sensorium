@@ -1,4 +1,4 @@
-"""Best-effort demo — not runtime-verified by author.
+"""Best-effort demo -- not runtime-verified by author.
 
 End-to-end walk through the public Provenance Sensorium API using only
 functions and CLI commands that exist in v0.1.0.

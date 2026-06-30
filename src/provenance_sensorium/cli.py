@@ -40,7 +40,7 @@ def cmd_receipt(args: argparse.Namespace) -> int:
 def cmd_explain(args: argparse.Namespace) -> int:
     receipt = receipt_from_json(Path(args.receipt).read_text(encoding="utf-8"))
     print(explain_receipt(receipt), end="")
-    # Surface BLOCK decisions in the exit code, like scan/receipt — a CI step
+    # Surface BLOCK decisions in the exit code, like scan/receipt -- a CI step
     # running `explain` on a stored receipt must fail-closed, not always exit 0.
     return 1 if has_block(receipt) else 0
 

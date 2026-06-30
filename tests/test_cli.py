@@ -28,7 +28,7 @@ def test_init_fixture_creates_sample(tmp_path: Path) -> None:
 
 def test_explain_surfaces_block_in_exit_code(tmp_path: Path) -> None:
     # A receipt that recorded a BLOCK must make `explain` exit non-zero too,
-    # not always 0 — fail-closed on the explain path.
+    # not always 0 -- fail-closed on the explain path.
     secret = tmp_path / "README.md"
     secret.write_text("api_key = sk-abcdefghijklmnopqrstuvwxyz\n", encoding="utf-8")
     output = tmp_path / "receipt.json"
