@@ -18,6 +18,11 @@ classifiers = [
   "Topic :: Software Development :: Quality Assurance",
 ]
 
+[project.urls]
+Homepage = "https://github.com/HarperZ9/provenance-sensorium"
+Repository = "https://github.com/HarperZ9/provenance-sensorium"
+Issues = "https://github.com/HarperZ9/provenance-sensorium/issues"
+
 [project.scripts]
 sensorium = "provenance_sensorium.cli:main"
 

@@ -1,4 +1,4 @@
-"""Canonical secret-shape patterns — one source of truth for the file sensor and
+"""Canonical secret-shape patterns -- one source of truth for the file sensor and
 the public-surface scanner, so the two never drift apart.
 
 Each pattern literal is assembled from split fragments so that THIS module's own
@@ -32,7 +32,7 @@ SECRET_PATTERNS: list[tuple[str, re.Pattern]] = [
     ("jwt", re.compile(r"\b" + _JWT + r"[A-Za-z0-9_-]{8,}\.ey" + "J" + r"[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}")),
 ]
 
-# PII / private-contact shapes — public-surface scanner only.
+# PII / private-contact shapes -- public-surface scanner only.
 PII_PATTERNS: list[tuple[str, re.Pattern]] = [
     ("phone", re.compile(r"\b\d{3}[-.) ]?\d{3}[- ]?\d{4}\b")),
 ]

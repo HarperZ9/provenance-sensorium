@@ -25,7 +25,7 @@ class Provenance:
 
     @staticmethod
     def digest_text(text: str) -> str:
-        # Full-width SHA-256 — the digest is the re-derivable trust anchor, so it
+        # Full-width SHA-256 -- the digest is the re-derivable trust anchor, so it
         # must be the whole hash, never truncated.
         return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
 

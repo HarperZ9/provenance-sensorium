@@ -47,7 +47,7 @@ Receipts use a fixed set of statuses: `pass`, `warn`, `block`, `needs-human`,
 `unverified`. Observations carry the raw sensor status; decisions carry the
 exception-layer verdict.
 
-## Example 1 — scan a clean fixture
+## Example 1 -- scan a clean fixture
 
 ```powershell
 python -m provenance_sensorium scan fixtures/sample_project
@@ -73,7 +73,7 @@ Human authorization, authorship, and attestation remain explicit gates. The rece
 
 The clean fixture exits `0`.
 
-## Example 2 — scan a path that contains a secret
+## Example 2 -- scan a path that contains a secret
 
 A path whose text contains a secret-shaped value (for example, a line of the
 form `api_key` `=` `sk-<20+ characters>`, written here with spaces so this guide
@@ -102,7 +102,7 @@ Human authorization, authorship, and attestation remain explicit gates. The rece
 
 Because a decision is `block`, the command exits `1`.
 
-## Example 3 — write and re-explain a JSON receipt
+## Example 3 -- write and re-explain a JSON receipt
 
 ```powershell
 python -m provenance_sensorium receipt fixtures/sample_project --output receipt.json
@@ -126,7 +126,7 @@ Each decision and observation carries a `provenance` block with `source`,
 explanation as `scan`. Running `explain` on a receipt that recorded a `block`
 also exits `1`, so a stored receipt fails closed in CI.
 
-## Example 4 — create a fixture, then use the library
+## Example 4 -- create a fixture, then use the library
 
 Create a fresh synthetic fixture:
 
