@@ -13,3 +13,6 @@ __pycache__/
 htmlcov/
 Codex.local.md
 .DS_Store
+
+# Local-only Claude instructions (global standard: never commit)
+CLAUDE.local.md
